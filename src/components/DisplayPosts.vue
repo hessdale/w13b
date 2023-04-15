@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="switch_layout">Switch layout</button>
     <article>
       <h3>user: {{ user1 }}</h3>
       <p>content: {{ content1 }}</p>
@@ -30,6 +31,15 @@
 
 <script>
 export default {
+  methods: {
+    switch_layout: function () {
+      if (columns === 1) {
+        this.colums = 3;
+      } else {
+        this.colums = 1;
+      }
+    },
+  },
   //adding variables for the html to refer too
   data() {
     return {
@@ -52,6 +62,8 @@ export default {
       user5: `Dale4`,
       content5: `lorem ipsum blah blah blah`,
       date_created5: `4 / 15 / 2023`,
+
+      colums: 1,
     };
   },
 };
