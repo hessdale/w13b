@@ -5,8 +5,9 @@
 </template>
 
 <script>
+//importing displayposts
 import DisplayPosts from "@/components/DisplayPosts.vue";
-
+//registering displayposts
 export default {
   name: "App",
   components: {
