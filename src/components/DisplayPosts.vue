@@ -1,73 +1,76 @@
 <template>
   <div>
+    <!-- adding event lister with @click that uses a function to switch layout -->
     <button @click="switch_layout">Switch layout</button>
-    <article>
-      <h3>user: {{ user1 }}</h3>
-      <p>content: {{ content1 }}</p>
-      <h4>date created: {{ date_created1 }}</h4>
-    </article>
-    <article>
-      <h3>user: {{ user2 }}</h3>
-      <p>content: {{ content2 }}</p>
-      <h4>date created: {{ date_created2 }}</h4>
-    </article>
-    <article>
-      <h3>user: {{ user3 }}</h3>
-      <p>content: {{ content3 }}</p>
-      <h4>date created: {{ date_created3 }}</h4>
-    </article>
-    <article>
-      <h3>user: {{ user4 }}</h3>
-      <p>content: {{ content4 }}</p>
-      <h4>date created: {{ date_created4 }}</h4>
-    </article>
-    <article>
-      <h3>user: {{ user5 }}</h3>
-      <p>content: {{ content5 }}</p>
-      <h4>date created: {{ date_created5 }}</h4>
-    </article>
+    <!-- a ref to change the column -->
+    <div ref="column_setting">
+      <!-- using a foor loop to inject the tweets -->
+      <article v-for="(tweet, i) in tweets" :key="i">
+        <h3>user: {{ tweet[`user`] }}</h3>
+        <p>content: {{ tweet[`content`] }}</p>
+        <h4>date created: {{ tweet[`date_created`] }}</h4>
+      </article>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  //setting inline style back and forth comlumn and rows with attributes
   methods: {
     switch_layout: function () {
-      if (columns === 1) {
-        this.colums = 3;
+      if (this.$refs[`column_setting`][`style`][`gridAutoFlow`] !== `column`) {
+        this.$refs[`column_setting`][`style`][`gridAutoFlow`] = `column`;
       } else {
-        this.colums = 1;
+        this.$refs[`column_setting`][`style`][`gridAutoFlow`] = `row`;
       }
     },
   },
+
   //adding variables for the html to refer too
   data() {
     return {
-      user1: `Dale`,
-      content1: `lorem ipsum blah blah blah`,
-      date_created1: `4 / 15 / 2023`,
+      tweets: [
+        {
+          user: `Dale`,
+          content: `lorem ipsum blah blah blah`,
+          date_created: `4 / 15 / 2023`,
+        },
 
-      user2: `Dale1`,
-      content2: `lorem ipsum blah blah blah`,
-      date_created2: `4 / 15 / 2023`,
+        {
+          user: `Dale1`,
+          content: `lorem ipsum blah blah blah`,
+          date_created: `4 / 16 / 2023`,
+        },
 
-      user3: `Dale2`,
-      content3: `lorem ipsum blah blah blah`,
-      date_created3: `4 / 15 / 2023`,
+        {
+          user: `Dale2`,
+          content: `lorem ipsum blah blah blah`,
+          date_created: `4 / 18 / 2023`,
+        },
 
-      user4: `Dale3`,
-      content4: `lorem ipsum blah blah blah`,
-      date_created4: `4 / 15 / 2023`,
+        {
+          user: `Dale3`,
+          content: `lorem ipsum blah blah blah`,
+          date_created: `4 / 10 / 2023`,
+        },
 
-      user5: `Dale4`,
-      content5: `lorem ipsum blah blah blah`,
-      date_created5: `4 / 15 / 2023`,
-
-      colums: 1,
+        {
+          user: `Dale4`,
+          content: `lorem ipsum blah blah blah`,
+          date_created: `4 / 11 / 2023`,
+        },
+      ],
     };
   },
 };
 </script>
 
 <style scoped>
+div {
+  display: grid;
+}
+button {
+  width: 200px;
+}
 </style>
